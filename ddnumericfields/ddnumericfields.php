@@ -33,9 +33,6 @@ function mm_ddNumericFields($tvs = '', $roles = '', $templates = '', $allowFloat
 		
 		$output .= "\n// ---------------- mm_ddNumericFields :: Begin ------------- \n";
 		
-		//Include jquery.ddTools
-		$output .= includeJs($modx->config['site_url'].'assets/plugins/managermanager/js/jquery.ddTools-1.8.1.min.js', 'js', 'jquery.ddTools', '1.8.1');
-
 		foreach ($tvs as $tv){
 			$output .= '
 $j("#tv'.$tv['id'].'").ddNumeric({
