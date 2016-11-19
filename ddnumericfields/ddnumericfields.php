@@ -7,7 +7,7 @@
  * 
  * @uses MODXEvo.plugin.ManagerManager >= 0.6.
  * 
- * @param $tvs {string_commaSeparated} — TV names to which the widget is applied. @required
+ * @param $fields {string_commaSeparated} — TV names to which the widget is applied. @required
  * @param $roles {string_commaSeparated} — The roles that the widget is applied to (when this parameter is empty then widget is applied to the all roles). Default: ''.
  * @param $templates {string_commaSeparated} — Id of the templates to which this widget is applied. Default: ''.
  * @param $allowFloat {boolean} — Float number availability status (true — float numbers may be used, false — float numbers using is not available). Default: true.
@@ -19,7 +19,7 @@
  */
 
 function mm_ddNumericFields(
-	$tvs = '',
+	$fields = '',
 	$roles = '',
 	$templates = '',
 	$allowFloat = 1,
@@ -32,17 +32,17 @@ function mm_ddNumericFields(
 		$e->name == 'OnDocFormRender' &&
 		useThisRule($roles, $templates)
 	){
-		$tvs = tplUseTvs($mm_current_page['template'], $tvs);
-		if ($tvs == false){return;}
+		$fields = tplUseTvs($mm_current_page['template'], $fields);
+		if ($fields == false){return;}
 		
 		$output = '';
 		
 		$output .= '//---------- mm_ddNumericFields :: Begin -----'.PHP_EOL;
 		
-		foreach ($tvs as $tv){
+		foreach ($fields as $field){
 			$output .=
 '
-$j("#tv'.$tv['id'].'").ddNumeric({
+$j("#tv'.$field['id'].'").ddNumeric({
 	allowFloat: '.intval($allowFloat).',
 	decimals: '.intval($decimals).'
 });
