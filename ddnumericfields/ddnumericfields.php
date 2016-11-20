@@ -48,14 +48,14 @@ function mm_ddNumericFields($params){
 		'templates' => ''
 	], (array) $params);
 	
-	global $modx, $mm_current_page;
+	global $modx;
 	$e = &$modx->Event;
 	
 	if (
 		$e->name == 'OnDocFormRender' &&
 		useThisRule($params->roles, $params->templates)
 	){
-		$params->fields = tplUseTvs($mm_current_page['template'], $params->fields);
+		$params->fields = getTplMatchedFields($params->fields);
 		if ($params->fields == false){return;}
 		
 		$output = '';
@@ -65,7 +65,7 @@ function mm_ddNumericFields($params){
 		foreach ($params->fields as $field){
 			$output .=
 '
-$j("#tv'.$field['id'].'").ddNumeric({
+$j.ddMM.fields.'.$field.'.$elem.ddNumeric({
 	allowFloat: '.intval($params->allowFloat).',
 	decimals: '.intval($params->decimals).'
 });
