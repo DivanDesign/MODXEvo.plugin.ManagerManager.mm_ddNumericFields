@@ -62,15 +62,13 @@ function mm_ddNumericFields($params){
 		
 		$output .= '//---------- mm_ddNumericFields :: Begin -----'.PHP_EOL;
 		
-		foreach ($params->fields as $field){
-			$output .=
+		$output .=
 '
-$j.ddMM.fields.'.$field.'.$elem.ddNumeric({
+$j.ddMM.getFieldElems({fields: "'.implode(',', $params->fields).'"}).ddNumeric({
 	allowFloat: '.intval($params->allowFloat).',
 	decimals: '.intval($params->decimals).'
 });
 ';
-		}
 		
 		$output .= '//---------- mm_ddNumericFields :: End -----'.PHP_EOL;
 		
