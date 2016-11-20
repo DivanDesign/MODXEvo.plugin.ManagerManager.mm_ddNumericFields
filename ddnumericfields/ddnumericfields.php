@@ -5,46 +5,69 @@
  * 
  * @desc A widget for ManagerManager plugin denying using any chars in TV fields but numeric.
  * 
- * @uses MODXEvo.plugin.ManagerManager >= 0.6.
+ * @uses PHP >= 5.4.
+ * @uses MODXEvo.plugin.ManagerManager >= 0.7.
  * 
- * @param $fields {string_commaSeparated} — TV names to which the widget is applied. @required
- * @param $roles {string_commaSeparated} — The roles that the widget is applied to (when this parameter is empty then widget is applied to the all roles). Default: ''.
- * @param $templates {string_commaSeparated} — Id of the templates to which this widget is applied. Default: ''.
- * @param $allowFloat {boolean} — Float number availability status (true — float numbers may be used, false — float numbers using is not available). Default: true.
- * @param $decimals {integer} — Number of chars standing after comma (0 — any). Default: 0.
+ * @param $params {array_associative|stdClass} — The object of params. @required
+ * @param $params['fields'] {string_commaSeparated} — TV names to which the widget is applied. @required
+ * @param $params['allowFloat'] {boolean} — Float number availability status (true — float numbers may be used, false — float numbers using is not available). Default: true.
+ * @param $params['decimals'] {integer} — Number of chars standing after comma (0 — any). Default: 0.
+ * @param $params['roles'] {string_commaSeparated} — The roles that the widget is applied to (when this parameter is empty then widget is applied to the all roles). Default: ''.
+ * @param $params['templates'] {string_commaSeparated} — Id of the templates to which this widget is applied. Default: ''.
  * 
  * @link http://code.divandesign.biz/modx/mm_ddnumericfields/1.1.1
  * 
  * @copyright 2012–2013 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
-function mm_ddNumericFields(
-	$fields = '',
-	$roles = '',
-	$templates = '',
-	$allowFloat = 1,
-	$decimals = 0
-){
+function mm_ddNumericFields($params){
+	//For backward compatibility
+	if (
+		!is_array($params) &&
+		!is_object($params)
+	){
+		//Convert ordered list of params to named
+		$params = ddTools::orderedParamsToNamed([
+			'paramsList' => func_get_args(),
+			'compliance' => [
+				'fields',
+				'roles',
+				'templates',
+				'allowFloat',
+				'decimals'
+			]
+		]);
+	}
+	
+	//Defaults
+	$params = (object) array_merge([
+// 		'fields' => '',
+		'allowFloat' => true,
+		'decimals' => 0,
+		'roles' => '',
+		'templates' => ''
+	], (array) $params);
+	
 	global $modx, $mm_current_page;
 	$e = &$modx->Event;
 	
 	if (
 		$e->name == 'OnDocFormRender' &&
-		useThisRule($roles, $templates)
+		useThisRule($params->roles, $params->templates)
 	){
-		$fields = tplUseTvs($mm_current_page['template'], $fields);
-		if ($fields == false){return;}
+		$params->fields = tplUseTvs($mm_current_page['template'], $params->fields);
+		if ($params->fields == false){return;}
 		
 		$output = '';
 		
 		$output .= '//---------- mm_ddNumericFields :: Begin -----'.PHP_EOL;
 		
-		foreach ($fields as $field){
+		foreach ($params->fields as $field){
 			$output .=
 '
 $j("#tv'.$field['id'].'").ddNumeric({
-	allowFloat: '.intval($allowFloat).',
-	decimals: '.intval($decimals).'
+	allowFloat: '.intval($params->allowFloat).',
+	decimals: '.intval($params->decimals).'
 });
 ';
 		}
