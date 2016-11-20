@@ -1,7 +1,7 @@
 <?php
 /**
  * mm_ddNumericFields
- * @version 1.1.1 (2013-12-11)
+ * @version 1.2 (2016-11-20)
  * 
  * @desc A widget for ManagerManager plugin denying using any chars in TV fields but numeric.
  * 
@@ -15,9 +15,9 @@
  * @param $params['roles'] {string_commaSeparated} — The roles that the widget is applied to (when this parameter is empty then widget is applied to the all roles). Default: ''.
  * @param $params['templates'] {string_commaSeparated} — Id of the templates to which this widget is applied. Default: ''.
  * 
- * @link http://code.divandesign.biz/modx/mm_ddnumericfields/1.1.1
+ * @link http://code.divandesign.biz/modx/mm_ddnumericfields/1.2
  * 
- * @copyright 2012–2013 DivanDesign {@link http://www.DivanDesign.biz }
+ * @copyright 2012–2016 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
 function mm_ddNumericFields($params){
