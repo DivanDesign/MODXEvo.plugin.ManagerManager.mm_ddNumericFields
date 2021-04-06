@@ -1,0 +1,42 @@
+{
+	"name": "dd/evolutioncms-plugins-managermanager-mm_ddnumericfields",
+	"version": "1.2.0",
+	"description": "A widget for ManagerManager plugin denying using any chars in TV fields but numeric.",
+	"keywords": [
+		"modx",
+		"modx evo",
+		"modx evolution",
+		"evo",
+		"evo cms",
+		"evolutioncms",
+		"evolution cms",
+		"dd group",
+		"dd studio",
+		"divandesign",
+		"managermanager",
+		"mm",
+		"mm widget",
+		"mm_ddnumericfields",
+		"numeric fields",
+		"numeric tv"
+	],
+	"homepage": "https://code.divandesign.biz/modx/mm_ddnumericfields",
+	"authors": [
+		{
+			"name": "DD Group",
+			"email": "code@DivanDesign.biz",
+			"homepage": "https://code.divandesign.biz",
+			"role": "Owner"
+		},
+		{
+			"name": "Ilyas Ronef",
+			"email": "ilyas@DivanDesign.ru",
+			"homepage": "https://ronef.ru",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.4.0",
+		"dd/evolutioncms-plugins-managermanager": ">=0.7.0"
+	}
+}
