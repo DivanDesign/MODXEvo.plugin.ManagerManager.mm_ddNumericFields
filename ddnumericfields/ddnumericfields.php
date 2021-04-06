@@ -40,16 +40,18 @@ function mm_ddNumericFields($params){
 	}
 	
 	//Defaults
-	$params = (object) array_merge(
-		[
-// 			'fields' => '',
-			'allowFloat' => true,
-			'decimals' => 0,
-			'roles' => '',
-			'templates' => ''
-		],
-		(array) $params
-	);
+	$params = \DDTools\ObjectTools::extend([
+		'objects' => [
+			(object) [
+	// 			'fields' => '',
+				'allowFloat' => true,
+				'decimals' => 0,
+				'roles' => '',
+				'templates' => ''
+			],
+			$params
+		]
+	]);
 	
 	global $modx;
 	$e = &$modx->Event;
