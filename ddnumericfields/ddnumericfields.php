@@ -66,7 +66,7 @@ function mm_ddNumericFields($params){
 		)
 	){
 		$params->fields = getTplMatchedFields($params->fields);
-		if ($params->fields == false){
+		if ($params->fields === false){
 			return;
 		}
 		
