@@ -12,6 +12,7 @@
  * @param $params->fields {stringCommaSeparated} — TV names to which the widget is applied. @required
  * @param $params->allowFloat {boolean} — Float number availability status (true — float numbers may be used, false — float numbers using is not available). Default: true.
  * @param $params->decimals {integer} — Number of chars standing after comma (0 — any). Default: 0.
+ * @param $params->fixedDecimals {boolean} — Allows formatting a number using fixed-point notation (e. g. `10.00`) according to `$params->decimals`. Default: false.
  * @param $params->roles {stringCommaSeparated} — The roles that the widget is applied to (when this parameter is empty then widget is applied to the all roles). Default: ''.
  * @param $params->templates {stringCommaSeparated} — Id of the templates to which this widget is applied. Default: ''.
  * 
@@ -46,6 +47,7 @@ function mm_ddNumericFields($params){
 	// 			'fields' => '',
 				'allowFloat' => true,
 				'decimals' => 0,
+				'fixedDecimals' => false,
 				'roles' => '',
 				'templates' => ''
 			],
@@ -84,7 +86,8 @@ implode(
 ) .
 '"}).ddNumeric({
 	allowFloat: ' . intval($params->allowFloat) . ',
-	decimals: ' . intval($params->decimals) . '
+	decimals: ' . intval($params->decimals) . ',
+	fixedDecimals: ' . intval($params->fixedDecimals) . '
 });
 ';
 		
